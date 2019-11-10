@@ -1,5 +1,5 @@
 {
     "dockerFile": "Dockerfile",
-    "appPort": 4000,
+    "appPort": "4000:4000",
     "postCreateCommand": "bundle install --path ./vendor/bundle"
 }

@@ -24,7 +24,7 @@ url: "https://metalfs.github.io" # the base hostname & protocol for your site, e
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
