@@ -21,8 +21,8 @@ If you have access to a POWER8/POWER9 system equipped with a suitable FPGA, plea
 Refer to these guides for advanced Metal FS use cases:
 
 - Operator Parameters
-- Image Manifest Documentation
-- Operator Manifest Documentation
+- [Image Manifest Documentation](image_manifest)
+- [Operator Manifest Documentation](operator_manifest)
 - Operator Pipeline API (C++)
   - Basic usage
   - Filesystem Data Source / Data Sink
