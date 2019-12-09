@@ -9,6 +9,6 @@ These are the current prerequisites for developing Metal FS applications (on an 
  - The following packages, assuming Ubuntu 16.04
    - `build-essential cmake libfuse-dev liblmdb-dev libprotobuf-dev protobuf-compiler`
    - For SNAP: `git xterm tmux libncurses-dev`
-   - libjq: https://github.com/stedolan/jq
+   - libjq: [https://github.com/stedolan/jq](https://github.com/stedolan/jq)
    - GCC 7, must be installed from an unofficial package source
-   - node.js and npm for using third party operator packages
+   - [node.js and npm](https://github.com/nodesource/distributions/blob/master/README.md#deb) for using third party operator packages
