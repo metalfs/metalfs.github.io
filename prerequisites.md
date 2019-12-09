@@ -1,3 +1,14 @@
 # Metal FS Prerequisites
 
-Work in progress. Please move along...
+These are the current prerequisites for developing Metal FS applications (on an `amd64` host):
+
+ - Xilinx Vivado 2018.1
+   - Requires specific OS versions, e.g. Ubuntu 16.04
+   - As prescribed by the underlying SNAP framework
+   - The WebPACK edition is sufficient for simulating operators
+ - The following packages, assuming Ubuntu 16.04
+   - `build-essential cmake libfuse-dev liblmdb-dev libprotobuf-dev protobuf-compiler`
+   - For SNAP: `git xterm tmux libncurses-dev`
+   - libjq: https://github.com/stedolan/jq
+   - GCC 7, must be installed from an unofficial package source
+   - node.js and npm for using third party operator packages

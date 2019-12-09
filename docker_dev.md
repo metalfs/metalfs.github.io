@@ -38,7 +38,13 @@ docker-compose -f .devcontainer/docker-compose.yml exec dev bash
 
 ## X11-Forwarding
 
-If you are using a non-Linux host and want to start Vivado X11 applications from the container, please change the DISPLAY environment variable parameter to `"DISPLAY=host.docker.internal:0.0"` in `docker-compose.yml`
+If you are using a non-Linux host and want to start Vivado X11 applications from the container, please change the DISPLAY environment variable parameter to `"DISPLAY=host.docker.internal:0.0"` in `docker-compose.yml`.
+
+Allow Docker containers to connect to your X11 server:
+
+ - Linux: run `xhost local:root` ([Source](https://stackoverflow.com/a/43016704/5831785))
+ - Docker for Mac: Enable "Allow connections from network clients" in the XQuartz settings, then run `xhost + 127.0.0.1` ([Source](https://medium.com/@mreichelt/how-to-show-x11-windows-within-docker-on-mac-50759f4b65cb))
+ - Windows: Start VcXsrv with "Multiple Windows",  Display number 0 and "Disable access control" ([Source](https://dev.to/darksmile92/run-gui-app-in-linux-docker-container-on-windows-host-4kde))
 
 ## FUSE in Docker
 
