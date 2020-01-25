@@ -24,7 +24,7 @@ The available targets are defined [here](https://github.com/osmhpi/metal_fs/tree
 
 **streamBytes**:
 Defines the global stream width for all operators in the image.
-Note that not all operators support different stream widhts.
+Note that not all operators support different stream widths.
 Recommended values: 8, 16, 32, 64
 
 **operators**:

@@ -28,7 +28,7 @@ The root [Makefile](https://github.com/metalfs/getting-started/tree/master/Makef
 
 Under [`src/hls_operator_colorfilter`](https://github.com/metalfs/getting-started/tree/master/src/hls_operator_colorfilter), an example operator is defined that converts a bitmap image to grayscale.
 
-Its [`operator.json`](https://github.com/metalfs/getting-started/tree/master/src/hls_operator_colorfilter/operator.json) file contains the operator manifest which is used at build time to describe the operators configuration interface. Furthermore it specifies the command line options to be used at runtime.
+Its [`operator.json`](https://github.com/metalfs/getting-started/tree/master/src/hls_operator_colorfilter/operator.json) file contains the operator manifest which is used at build time to describe the operator's configuration interface. Furthermore it specifies the command line options to be used at runtime.
 
 [`hls_operator_colorfilter.cpp`](https://github.com/metalfs/getting-started/tree/master/src/hls_operator_colorfilter/hls_operator_colorfilter.cpp) contains the operator implementation in Vivado HLS. [`testbench.cpp`](https://github.com/metalfs/getting-started/tree/master/src/hls_operator_colorfilter/testbench.cpp) can be used to test the implementation in software by running `make test` from the operator directory.
 

@@ -2,7 +2,7 @@
 
 Once the `make image` process has finished, you will find the FPGA bitstream in `build/<target>/snap/hardware/build/Images/<bitstream>.bin`. Copy this file to your POWER machine.
 
-Deploy it to your FPGA using the flash script from [`capi-utils`](https://github.com/ibm-capi/capi-utils), e.g.: `capi-flash-script <bistream>.bin`.
+Deploy it to your FPGA using the flash script from [`capi-utils`](https://github.com/ibm-capi/capi-utils), e.g.: `capi-flash-script <bitstream>.bin`.
 
 Afterwards, perform the initial action discovery using [SNAP](https://github.com/open-power/snap) tooling:
 ```bash
