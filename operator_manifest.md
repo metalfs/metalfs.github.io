@@ -27,7 +27,7 @@ Example:
 
 **main**:
 The entrypoint/top-level component of the operator.
-Depending on the buildpack (e.g. HLS or HDL), this is used during the IP build process.
+Depending on the [buildpack](buildpacks) (e.g. HLS or HDL), this is used during the IP build process.
 
 **description**:
 Usage information about the operator. Displayed as part of the help text provided by the operator executable.
@@ -44,9 +44,9 @@ The values are another JSON object with the following properties:
 
  - **short**: Short parameter name (for passing arguments to the operator executable). *Optional.*
  - **type**: One of the supported parameter types:
-   - `bool`
-   - `int`
-   - `{ "type": "buffer", "size": 128 }` (`size` can be chosen arbitrarily)
+   - `"bool"`
+   - `"int"`
+   - `{ "type": "buffer", "size": <number> }` (`size` can be chosen arbitrarily)
  - **description**: Description shown in help text of the operator executable
  - **offset**: Offset of the parameter in the operator register space
 

@@ -30,7 +30,7 @@ Refer to these guides for advanced Metal FS use cases:
 - Operator Profiling at Runtime
 - Operator Hardware Interface
 - Benchmarking Data Generator
-- Operator Buildpacks
+- [Operator Buildpacks](buildpacks)
 - FPGA Targets
 
 ## Feedback
