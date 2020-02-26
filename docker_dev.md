@@ -2,29 +2,25 @@
 
 ## Docker Images
 
-The following Docker images are stacked to provide a self-contained development environment for Metal FS Operators:
+The following Docker images are stacked to provide a self-contained development environment for Metal FS Operators and Metal FS-based applications:
 
  - Xilinx Vivado
     ([metalfs/xilinx-vivado](https://hub.docker.com/r/metalfs/xilinx-vivado),
      [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/xilinx-vivado))
     <br/>Includes an installation of Vivado with FPGAs supported by SNAP
- - SNAP Base
-    ([metalfs/snap-base](https://hub.docker.com/r/metalfs/snap-base),
-     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/snap-base))
-    <br/>Further prerequisites for SNAP
- - SNAP
-    ([metalfs/snap](https://hub.docker.com/r/metalfs/snap),
+ - SDK Base
+    ([metalfs/sdk-base](https://hub.docker.com/r/metalfs/sdk-base),
+     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/sdk-base))
+    <br/>Prerequisites for Metal FS (useful for development of the project)
+ - SDK
+    ([metalfs/sdk](https://hub.docker.com/r/metalfs/snap),
      [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/snap))
-    <br/>The SNAP framework
- - Build Base
-    ([metalfs/build-base](https://hub.docker.com/r/metalfs/build-base),
-     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/build-base))
-    <br/>Further prerequisites for Metal FS
+    <br/>Includes Metal FS binaries for developing accelerated applications
 
 ## Visual Studio Code Development Container
 
 Using a plugin for the VS Code Editor, source code can be edited through a Docker container that has additional software installed, in this case the prerequisites listed above.
-Create `devcontainer.json` and `docker-compose.yml` files in your repository to get started.
+Create [`devcontainer.json`](https://github.com/metalfs/getting-started/tree/master/.devcontainer/devcontainer.json) and [`docker-compose.yml`](https://github.com/metalfs/getting-started/tree/master/.devcontainer/docker-compose.yml) files in your repository to get started.
 
 ![HLS Development in Visual Studio Code](assets/vscode.png)
 
@@ -33,12 +29,12 @@ Create `devcontainer.json` and `docker-compose.yml` files in your repository to 
 You can also use the `docker-compose.yml` to spin up a development container without using VS Code.
 ```
 docker-compose -f .devcontainer/docker-compose.yml up -d
-docker-compose -f .devcontainer/docker-compose.yml exec dev bash
+docker-compose -f .devcontainer/docker-compose.yml exec metalfs-dev bash
 ```
 
 ## X11-Forwarding
 
-If you are using a non-Linux host and want to start Vivado X11 applications from the container, please change the DISPLAY environment variable parameter to `"DISPLAY=host.docker.internal:0.0"` in `docker-compose.yml`.
+If you are using a non-Linux host and want to start Vivado X11 applications from the container, please change the DISPLAY environment variable parameter to `"DISPLAY=host.docker.internal:0.0"` in `.devcontainer/docker-compose.yml`.
 
 Allow Docker containers to connect to your X11 server:
 
