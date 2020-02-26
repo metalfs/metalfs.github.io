@@ -13,8 +13,8 @@ The following Docker images are stacked to provide a self-contained development 
      [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/sdk-base))
     <br/>Prerequisites for Metal FS (useful for development of the project)
  - SDK
-    ([metalfs/sdk](https://hub.docker.com/r/metalfs/snap),
-     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/snap))
+    ([metalfs/sdk](https://hub.docker.com/r/metalfs/sdk),
+     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/sdk))
     <br/>Includes Metal FS binaries for developing accelerated applications
 
 ## Visual Studio Code Development Container
