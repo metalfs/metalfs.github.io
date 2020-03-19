@@ -184,4 +184,16 @@ $ echo "Hello World!" | /mtl/operators/uppercase
 HELLO WORLD
 ```
 
-Success!
+Terminating the simulation is a bit cumbersome at this point:
+```
+killall metal-driver
+```
+
+## Next steps
+
+ - Inspect the simulation waveform
+ - [Create an image from multiple operators](image_manifest)
+ - Add parameters to your operator
+ - Integrate the operator into your C++ application
+ - Learn more about operator profiling and benchmarking
+ - [Write an operator using VHDL or Verilog](buildpacks)
