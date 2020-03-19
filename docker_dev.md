@@ -4,18 +4,18 @@
 
 The following Docker images are stacked to provide a self-contained development environment for Metal FS Operators and Metal FS-based applications:
 
- - Xilinx Vivado
-    ([metalfs/xilinx-vivado](https://hub.docker.com/r/metalfs/xilinx-vivado),
-     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/xilinx-vivado))
-    <br/>Includes an installation of Vivado with FPGAs supported by SNAP
+ - SDK
+    ([metalfs/sdk](https://hub.docker.com/r/metalfs/sdk),
+     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/sdk))
+    <br/>Includes the Metal FS SDK, including precompiled binaries, for developing accelerated applications
  - SDK Base
     ([metalfs/sdk-base](https://hub.docker.com/r/metalfs/sdk-base),
      [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/sdk-base))
     <br/>Prerequisites for Metal FS (useful for development of the project)
- - SDK
-    ([metalfs/sdk](https://hub.docker.com/r/metalfs/sdk),
-     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/sdk))
-    <br/>Includes Metal FS binaries for developing accelerated applications
+ - Xilinx Vivado
+    ([metalfs/xilinx-vivado](https://hub.docker.com/r/metalfs/xilinx-vivado),
+     [Source](https://github.com/osmhpi/metal_fs/tree/master/docker/xilinx-vivado))
+    <br/>Includes an installation of Vivado with FPGAs supported by SNAP
 
 ## Visual Studio Code Development Container
 
