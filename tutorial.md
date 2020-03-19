@@ -9,7 +9,8 @@ For your reference, the resulting project of this tutorial are available on GitH
 During this tutorial, we will develop a simple HLS operator that transforms a stream of ASCII characters into uppercase characters.
 
 We first start with an empty folder for our 'uppercase' operator: 
-```
+
+```bash
 mkdir uppercase && cd uppercase
 ```
 
@@ -49,7 +50,7 @@ TODO
 
 Before we get to the actual operator implementation, we need to provide an operator manifest in `operator.json`:
 
-```
+```json
 {
   "main": "uppercase",
   "description": "Transform ASCII strings to uppercase."
