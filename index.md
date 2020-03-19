@@ -1,6 +1,7 @@
 # Welcome
 
 Metal FS is a near-storage compute framework that combines FPGA compute kernels ('operators') with a file system.
+It is open-source on [GitHub](https://github.com/osmhpi/metalfs).
 
 It currently supports CAPI-enabled FPGA cards in IBM POWER systems.
 
@@ -37,4 +38,4 @@ Refer to these guides for advanced Metal FS use cases:
 
 We welcome your feedback to Metal FS!
 
-If you have questions or remarks, please create an [issue](https://github.com/osmhpi/metal_fs/issues) on the main [GitHub](https://github.com/osmhpi/metal_fs) repo.
+If you have questions or remarks, please create an [issue](https://github.com/osmhpi/metalfs/issues) on the main [GitHub](https://github.com/osmhpi/metalfs) repo.
