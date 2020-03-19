@@ -2,27 +2,32 @@
 
 This tutorial walks you through the process of creating a simple operator for Metal FS.
 
-Please make sure that you have prepared your system either by pulling the development Docker Container or by manually setting up the [prerequisites](prerequisites.html).
-
 For your reference, the resulting project of this tutorial are available on GitHub: [https://github.com/metalfs/getting-started](https://github.com/metalfs/getting-started)
 
 ## Step 1: Set up the Development Environment
 
 During this tutorial, we will develop a simple HLS operator that transforms a stream of ASCII characters into uppercase characters.
 
-We first start with an empty folder for our 'uppercase' operator: `mkdir uppercase && cd uppercase`.
+We first start with an empty folder for our 'uppercase' operator: 
+```
+mkdir uppercase && cd uppercase
+```
 
 To get you started quickly, we recommend using a development environment that is backed by a Docker container.
 It integrates nicely with Visual Studio Code and its 'Remote - Containers' extension.
 
 If you'd rather like to use raw `docker-compose`, please refer to our [guide](docker_dev) for more details.
 
+This downloads the container configuration files:
+
 ```bash
 mkdir .devcontainer
 
-wget -o .devcontainer/docker-compose.yml https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/docker-compose.yml 
+wget -o .devcontainer/docker-compose.yml \
+  https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/docker-compose.yml 
 
-wget -o .devcontainer/devcontainer.json https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/devcontainer.json 
+wget -o .devcontainer/devcontainer.json \
+  https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/devcontainer.json 
 ```
 Open the project directory in VS Code and select 'Reopen in Container' from the global menu (Ctrl/Cmd + Shift + P).
 
@@ -40,7 +45,6 @@ You can now run `make help` to see the available targets provided by the buildpa
 
 ```
 TODO
-
 ```
 
 Before we get to the actual operator implementation, we need to provide an operator manifest in `operator.json`:
@@ -74,9 +78,14 @@ void uppercase(mtl_stream &in, mtl_stream &out) {
         for (int i = 0; i < sizeof(element.data); ++i)
         {
             // Select the ith byte from element
-            auto tmp = element.data(i * 8 + 7, i * 8);
-            if (tmp >= 'a' && tmp <= 'z' && element.keep[i])
-                element.data(i * 8 + 7, i * 8) = tmp - ('a' - 'A');
+            auto current = element.data(i * 8 + 7, i * 8);
+
+            // If current is lowercase, exchange it
+            // by an uppercase letter
+            if (current >= 'a' && current <= 'z') {
+                element.data(i * 8 + 7, i * 8) 
+                  = current - ('a' - 'A');
+            }
         }
 
         out.write(element);
