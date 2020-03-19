@@ -1,4 +1,4 @@
-# Welcome
+# Metal FS
 
 Metal FS is a near-storage compute framework that combines FPGA compute kernels ('operators') with a file system.
 It is open-source on [GitHub](https://github.com/osmhpi/metalfs).
@@ -9,9 +9,10 @@ Development and simulation of operators is possible using only free tools (x86_6
 
 ## Getting started
 
+The [tutorial](tutorial.html) will cover how to create a Metal FS FPGA image that consists of pre-defined operators as well as a custom image transformation kernel.
+
 For operator development you can either use a [Dockerized development environment](docker_dev.html) (recommended), or set up the [prerequisites](prerequisites.html) manually.
 
-The [tutorial](tutorial.html) will cover how to create a Metal FS FPGA image that consists of pre-defined operators as well as a custom image transformation kernel.
 
 ## Running on POWER
 
