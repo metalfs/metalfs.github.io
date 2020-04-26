@@ -11,7 +11,7 @@ Development and simulation of operators is possible using only free tools (x86_6
 
 The [tutorial](tutorial.html) will cover how to create a Metal FS FPGA image that consists of pre-defined operators as well as a custom image transformation kernel.
 
-For operator development you can either use a [Dockerized development environment](docker_dev.html) (recommended), or set up the [prerequisites](prerequisites.html) manually.
+For operator development you can either use a [dockerized development environment](docker_dev.html) (recommended), or set up the [prerequisites](prerequisites.html) manually.
 
 
 ## Running on POWER
