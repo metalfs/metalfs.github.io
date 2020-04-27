@@ -1,4 +1,4 @@
-# Tutorial 
+# Tutorial
 
 This tutorial walks you through the process of creating a simple operator for Metal FS.
 
@@ -8,7 +8,7 @@ For your reference, the resulting project of this tutorial are available on GitH
 
 During this tutorial, we will develop a simple HLS operator that transforms a stream of ASCII characters into uppercase characters.
 
-We first start with an empty folder for our 'uppercase' operator: 
+We first start with an empty folder for our 'uppercase' operator:
 
 ```bash
 mkdir uppercase && cd uppercase
@@ -24,11 +24,11 @@ This downloads the container configuration files:
 ```bash
 mkdir .devcontainer
 
-wget -o .devcontainer/docker-compose.yml \
-  https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/docker-compose.yml 
+wget -O .devcontainer/docker-compose.yml \
+  https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/docker-compose.yml
 
-wget -o .devcontainer/devcontainer.json \
-  https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/devcontainer.json 
+wget -O .devcontainer/devcontainer.json \
+  https://raw.githubusercontent.com/metalfs/getting-started/master/.devcontainer/devcontainer.json
 ```
 Open the project directory in VS Code and select 'Reopen in Container' from the global menu (Ctrl/Cmd + Shift + P).
 
@@ -61,7 +61,7 @@ The `main` attribute in the manifest refers to the entrypoint of our HLS code.
 
 ## Step 2: Implement the Operator in HLS
 
-Now, the HLS implementation of our uppercase operator is very straightforward. 
+Now, the HLS implementation of our uppercase operator is very straightforward.
 Here are the contents of the `uppercase.cpp` file:
 
 ```cpp
@@ -84,7 +84,7 @@ void uppercase(mtl_stream &in, mtl_stream &out) {
             // If current is lowercase, exchange it
             // by an uppercase letter
             if (current >= 'a' && current <= 'z') {
-                element.data(i * 8 + 7, i * 8) 
+                element.data(i * 8 + 7, i * 8)
                   = current - ('a' - 'A');
             }
         }
@@ -94,7 +94,7 @@ void uppercase(mtl_stream &in, mtl_stream &out) {
 }
 ```
 
-Note how the `#pragma HLS INTERFACE` directives instruct the compiler to create the operator hardware interfaces. 
+Note how the `#pragma HLS INTERFACE` directives instruct the compiler to create the operator hardware interfaces.
 
 Also note that in this code, we don't actually define how many bytes a stream element contains.
 This is automatically inferred from the FPGA image configuration at build time.
@@ -105,7 +105,7 @@ The HLS syntax for selecting a single byte from the data word by specifying the 
 ## Step 3: Test the operator in a testbench
 
 The benefit of HLS programming is that we can run our code as software to quickly see if it works.
-Therefore, we add a testbench file reference to our `Makefile`:
+Therefore, we add a testbench file reference to the top of our `Makefile`:
 
 ```Makefile
 testbench_srcs += testbench.cpp
@@ -113,41 +113,54 @@ testbench_srcs += testbench.cpp
 
 This is our `testbench.cpp`:
 ```cpp
+#include <stdio.h>
+#include <string.h>
+#include <metal/stream.h>
+
+// Forward-declere the operator entrypoint
 void uppercase(mtl_stream &in, mtl_stream &out);
+
+void copyBufferToStream(const char *buffer, size_t buffer_length, mtl_stream &stream) {
+  size_t readBytes = 0;
+  mtl_stream_element inputElement;
+  do {
+    memcpy(&inputElement.data, buffer + readBytes,
+        std::min(buffer_length - readBytes, sizeof(inputElement.data)));
+    inputElement.keep = 0xff;
+    inputElement.last = readBytes + sizeof(inputElement.data) >= buffer_length;
+
+    stream.write(inputElement);
+
+    readBytes += sizeof(inputElement.data);
+  } while (!inputElement.last);
+}
+
+void copyStreamToBuffer(mtl_stream &stream, char *buffer, size_t buffer_length) {
+  size_t writtenBytes = 0;
+  mtl_stream_element outputElement;
+  do {
+    outputElement = stream.read();
+    memcpy(buffer + writtenBytes, &outputElement.data,
+        std::min(buffer_length - writtenBytes, sizeof(outputElement.data)));
+
+    writtenBytes += sizeof(outputElement.data);
+  } while (!outputElement.last);
+}
 
 int main() {
   const char input[] = "This should become uppercase";
 
   // Transform our input data into a mtl_stream
-  int readBytes = 0;
-  mtl_stream operatorInput; 
-  mtl_stream_element inputElement;
-  do {
-    memcpy(&inputElement.data, input + readBytes, 
-        std::min(sizeof(input) - readBytes, sizeof(inputElement.data)));
-    inputElement.keep = 0xff;
-    inputElement.last = readBytes + sizeof(inputElement.data) >= sizeof(input);
-
-    operatorInput.write(inputElement);
-
-    readBytes += sizeof(inputElement.data);
-  } while (!inputElement.last);
+  mtl_stream operatorInput;
+  copyBufferToStream(input, sizeof(input), operatorInput);
 
   // Call the operator
   mtl_stream operatorOutput;
-  colorfilter(operatorInput, operatorOutput);
+  uppercase(operatorInput, operatorOutput);
 
   // Read the output back into a buffer for comparison
   char outputData[sizeof(input)];
-  int writtenBytes = 0;
-  mtl_stream_element outputElement;
-  do {
-    outputElement = operatorOutput.read();
-    memcpy(outputData + writtenBytes, &outputElement.data, 
-        std::min(sizeof(outputData) - writtenBytes, sizeof(outputElement.data)));
-
-    writtenBytes += sizeof(outputElement.data);
-  } while (!outputElement.last);
+  copyStreamToBuffer(operatorOutput, outputData, sizeof(outputData));
 
   const char expected[] = "THIS SHOULD BECOME UPPERCASE";
 
@@ -165,7 +178,10 @@ int main() {
 
 Let's see if it works using `make test`. You will probably see lots of HLS compiler output, but towards the end you should find:
 ```
-TODO
+Success.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [Common 17-206] Exiting vivado_hls at Mon Apr 27 17:39:19 2020...
 ```
 
 It works!
