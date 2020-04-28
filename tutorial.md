@@ -217,7 +217,7 @@ Afterwards, in a second terminal in the development container, you can try out t
 HELLO WORLD
 ```
 
-Terminating the simulation is a bit cumbersome at this point. You have do call this twice (yes, that's a bug):
+Terminating the simulation is a bit cumbersome at this point. You have to call this twice (yes, that's a bug):
 ```
 pkill metal-driver
 ```
