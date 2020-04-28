@@ -2,7 +2,7 @@
 
 This tutorial walks you through the process of creating a simple operator for Metal FS.
 
-For your reference, the resulting project of this tutorial are available on GitHub: [https://github.com/metalfs/getting-started](https://github.com/metalfs/getting-started)
+For your reference, the resulting project files of this tutorial are available on GitHub: [https://github.com/metalfs/getting-started](https://github.com/metalfs/getting-started)
 
 ## Step 1: Set up the Development Environment
 
@@ -32,6 +32,8 @@ wget -O .devcontainer/devcontainer.json \
 ```
 Open the project directory in VS Code and select 'Reopen in Container' from the global menu (Ctrl/Cmd + Shift + P).
 
+> Be aware that this will download a Docker image that is 16 GB in size (6.5 GB to download).
+
 ## Step 2: Bootstrap the Operator Project
 
 To tie in the Metal FS [Operator buildpack](buildpacks) for HLS, we now create a `Makefile` with the following contents:
@@ -45,7 +47,14 @@ include $(METAL_ROOT)/buildpacks/hls/hls.mk
 You can now run `make help` to see the available targets provided by the buildpack:
 
 ```
-TODO
+Targets in the HLS Operator Buildpack
+=====================================
+* ip             Build Vivado IP
+* test           Run HLS testbench
+* devmodel       Build a simulation model containing only the current operator
+* sim            Start a simulation with the devmodel
+* clean          Remove the build directory
+* help           Print this message
 ```
 
 Before we get to the actual operator implementation, we need to provide an operator manifest in `operator.json`:
@@ -102,7 +111,7 @@ Since we only perform bytewise processing and the streams always contain a full 
 
 The HLS syntax for selecting a single byte from the data word by specifying the bit range (e.g. `lowest_byte = word(7, 0)`) might be familiar to you if you have experience with VHDL or Verilog.
 
-## Step 3: Test the operator in a testbench
+## Step 3: Test the Operator in a Testbench
 
 The benefit of HLS programming is that we can run our code as software to quickly see if it works.
 Therefore, we add a testbench file reference to the top of our `Makefile`:
@@ -191,19 +200,26 @@ It works!
 As the next step, we will create a simulation model of an entire FPGA image that contains our new operator.
 On the first run, this takes some time (~10 min), since also the Metal FS HLS components need to be compiled to a hardware description.
 
-Start the process with `make model`.
+Start the process with `make devmodel`.
 
 Once the model synthesis has finished, run `make sim` to start the simulation.
+When you see these lines in the log, the filesystem is running:
+
+```
+[info] Found operator uppercase
+[info] Starting FUSE driver...
+```
+
 Afterwards, in a second terminal in the development container, you can try out the simulated operator:
 
 ```
-$ echo "Hello World!" | /mtl/operators/uppercase
+# echo Hello World | /mnt/operators/uppercase
 HELLO WORLD
 ```
 
-Terminating the simulation is a bit cumbersome at this point:
+Terminating the simulation is a bit cumbersome at this point. You have do call this twice (yes, that's a bug):
 ```
-killall metal-driver
+pkill metal-driver
 ```
 
 ## Next steps
