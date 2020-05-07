@@ -13,12 +13,11 @@ Example:
         "encrypt": "@metalfs/encrypt"
     }
 }
-
 ```
 
 ## Detailed Property Descriptions
 
-**target**: 
+**target**:
 One of the supported hardware targets for Metal FS, including the hardware shell to use (for now, only `SNAP` is supported).
 The available targets are defined [here](https://github.com/osmhpi/metal_fs/tree/master/targets).
 

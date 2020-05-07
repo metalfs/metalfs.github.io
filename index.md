@@ -22,7 +22,7 @@ If you have access to a POWER8/POWER9 system equipped with a suitable FPGA, plea
 
 Refer to these guides for advanced Metal FS use cases:
 
-- Operator Parameters
+- [Operator Parameters](operator_parameters)
 - [Image Manifest Documentation](image_manifest)
 - [Operator Manifest Documentation](operator_manifest)
 - Operator Pipeline API (C++)

@@ -212,8 +212,8 @@ When you see these lines in the log, the filesystem is running:
 
 Afterwards, in a second terminal in the development container, you can try out the simulated operator:
 
-```
-# echo Hello World | /mnt/operators/uppercase
+```bash
+$ echo Hello World | /mnt/operators/uppercase
 HELLO WORLD
 ```
 
@@ -226,7 +226,7 @@ pkill metal-driver
 
  - Inspect the simulation waveform
  - [Create an image from multiple operators](image_manifest)
- - Add parameters to your operator
+ - [Add parameters to your operator](operator_parameters)
  - Integrate the operator into your C++ application
  - Learn more about operator profiling and benchmarking
  - [Write an operator using VHDL or Verilog](buildpacks)

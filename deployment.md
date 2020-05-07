@@ -30,6 +30,6 @@ Note that the file system metadata is not persisted outside of the container in 
 
 Now, you could start a shell in the container to access the file system in `/mnt`:
 
-```
+```bash
 docker exec -it metalfs bash
 ```

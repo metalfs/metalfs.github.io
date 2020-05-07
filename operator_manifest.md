@@ -6,8 +6,9 @@ Example:
 ```json
 {
     "main": "changecase",
-    "description": 
+    "description":
         "Transform ASCII strings to lower- or uppercase",
+    "prepare_required": false,
     "options": {
         "lowercase": {
             "short": "l",
@@ -20,7 +21,6 @@ Example:
         "streamBytes": 8
     }
 }
-
 ```
 
 ## Detailed Property Descriptions
@@ -36,6 +36,13 @@ Example:
 /metal_fs $ ./operators/colorfilter --help
 Convert bitmap to grayscale
 ```
+
+**prepare_required**:
+Whether the operator requires to prepare its internal state before processing starts.
+*Optional* (default: `false`).
+
+This is typically used to avoid costly parameter ingestion computations on each operator invocation.
+Instead, the processing phase is only trigged when the parameter values change, i.e. once per `PipelineRunner` invocation. See also: [Operator Parameters](operator_parameters)
 
 **options**:
 JSON object specifying configuration options for the operator to be provided at runtime.
