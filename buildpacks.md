@@ -1,7 +1,7 @@
 # Buildpacks
 
 Metal FS provides build packs for creating operators from different types of hardware descriptions as well as to create FPGA images from an image manifest.
-Build packs are `make` based. 
+Build packs are `make` based.
 
 ## Image Build Pack
 
@@ -34,8 +34,14 @@ srcs += changecase.vhd
 include $(METAL_ROOT)/buildpacks/hdl/hdl.mk
 ```
 
-The buildpack offers all `make` targets from the image buildpack, so you can quickly build a simulation model from your operator.
+The buildpack offers the following targets, so you can quickly build a simulation model from your operator:
+
+ - `make help` -- shows help
+ - `make devmodel` -- (similar to `make model` from the image buildpack)
+ - `make sim` -- starts simulation with the devmodel
+
+For setting the stream width to be used in the devmodel image, please refer to the [operator manifest](operator_manifest) docs.
+
 The HLS buildpack additionally offers the following target:
 
  - `make test` -- runs the HLS testbench
- 
