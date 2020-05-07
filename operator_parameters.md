@@ -37,7 +37,6 @@ Here's another example with a parameter that contains a buffer of bytes.
 Note that this operator also uses the optional `prepare` phase, which allows it to perform potentially time-consuming initialization steps before the actual processing phase.
 
 ```cpp
-
 void encrypt(
         mtl_stream &in,
         mtl_stream &out,
