@@ -95,7 +95,7 @@ Note that the parameter offset is given as a decimal value (0x100 = 256).
 Once you've obtained an `Operator` object from the `OperatorFactory`, refer to the desired parameter by name to provide its value.
 Example:
 
-```
+```cpp
 auto keyBytes = std::make_shared<std::vector<char>>(16);
 
 SnapAction fpga;
