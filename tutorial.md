@@ -126,7 +126,7 @@ This is our `testbench.cpp`:
 #include <string.h>
 #include <metal/stream.h>
 
-// Forward-declere the operator entrypoint
+// Forward-declare the operator entrypoint
 void uppercase(mtl_stream &in, mtl_stream &out);
 
 void copyBufferToStream(const char *buffer, size_t buffer_length, mtl_stream &stream) {
